@@ -1,0 +1,42 @@
+pilihan ="y"
+while pilihan =="y":
+
+    print(" TOKO BERKAH SUSU 'ANAK SEHAT' ")
+    print("------------------------------")
+    print("Merk: E Enfagrow | B Bebelac | N Nutrilion")
+    nama= str(input("Nama Pelanggan :" ))
+    merk = str(input("Merk Susu [E/B/N] ="))
+    jumlahbeli = int(input("Jumlah Beli ="))
+    print("------------------------------")
+    if merk=="E" or merk=="e" :
+        brand="Enfagrow A+3 Madu"
+        harga=24200
+        diskon=harga*0.02
+    elif merk=="B" or merk=="b":
+        brand="Bebelac 4 Bebenutri Vanila"
+        harga=28400
+        diskon=harga*0.05
+    elif merk=="N" or merk=="n":
+        brand="Nutrilon Royal 3 Madu"
+        harga=36700
+        diskon=harga*0.1
+    else:
+        print("Kode Merk tidak valid.")
+
+    total = (jumlahbeli*harga) - (diskon)
+
+    print("---------------------------")
+    print(" TOKO BERKAH SUSU 'ANAK SEHAT' ")
+    print("---------------------------")
+    print("Nama Pelanggan :",nama)
+    print("Merk Susu [E/B/N] :",merk)
+    print("Jumlah Beli :",jumlahbeli)
+    print("Harga :",harga)
+    print("Diskon :",diskon)
+    print("Total Bayar :",total)
+    print("---------------------------")
+    uangbayar=int(input("Uang Bayar :"))
+    uangkembali=uangbayar-total
+    print("Uang kembali :",uangkembali)
+    pilihan=input("Apakah Anda Ingin mengulang?[y/t] :")
+    print("Terima kasih telah berbelanja di Toko Berkah Susu Anak Sehat!")
