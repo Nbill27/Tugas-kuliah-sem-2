@@ -1,0 +1,95 @@
+pilihan = "Y"
+loyalty_points = 0
+cashback_voucher = 0
+#codebynabil
+
+while pilihan == "Y" or pilihan == "y":
+
+    print("         SALON KECANTIKAN Cristiano Messi            ")
+    print("=============================================")
+    print("                   LAYANAN                ")
+    print("=============================================")
+    print("   C= Creambath || G= Gunting || L= Lulur    ")
+    print("=============================================")
+
+    nama = str(input("Nama Pelanggan    : "))
+    kode = str(input("Menu layanan [C/G/L] : "))
+
+    if kode == "C":
+        menu = "Creambath"
+        harga = 80000
+    elif kode == "G":
+        menu = "Gunting"
+        harga = 55000
+    elif kode == "L":
+        menu = "Lulur"
+        harga = 100000
+    else:
+        print("Kode yang anda masukkan salah")
+        continue  # restart the loop if invalid code
+
+    jmlhlayanan = int(input("Jumlah layanan      : "))
+
+    print("\n\n==============================================")
+    print("             SALON KECANTIKAN Cristiano Messi        ||")
+    print("==============================================")
+    print("                 LAYANAN                  ||")
+    print("==============================================")
+    print("     C= Creambath || G= Gunting || L= Lulur ||")
+    print("==============================================")
+    print("Nama Pelanggan       :", nama)
+    print("Menu layanan [C/G/L] :", menu)
+    print("Jumlah layanan       :", jmlhlayanan)
+    print("Harga                : Rp", harga)
+    totbay = jmlhlayanan * harga
+    print("Total Bayar          : Rp", totbay)
+
+    # Loyalty points
+    points_earned = int(totbay / 10000)  # 1 point for every 10,000 spent
+    loyalty_points += points_earned
+    print("Loyalty Points Earned: ", points_earned)
+    print("Total Loyalty Points  : ", loyalty_points)
+
+    # Cashback voucher
+    cashback_threshold = 200000  # Spend at least 200,000 to get a cashback voucher
+    if totbay >= cashback_threshold:
+        cashback_voucher += 1
+        print("Selamat! Anda mendapatkan 1 Cashback Voucher.")
+        print("Total Cashback Voucher: ", cashback_voucher)
+
+    print("==============================================")
+    tunai = int(input("Uang Bayar           : Rp "))
+    kembali = tunai - totbay
+
+    if kembali >= 0:
+        print("Uang Kembali         : Rp", kembali)
+        print("==============================================")
+        print("Terima kasih telah menggunakan layanan kami!")
+        print("Anda memiliki", loyalty_points, "loyalty points.")
+        print("Anda memiliki", cashback_voucher, "cashback vouchers.")
+    else:
+        print("Maaf, uang anda kurang. Transaksi dibatalkan.")
+
+    # Redeem loyalty points for discount
+    redeem_choice = input("Ingin menukarkan loyalty points? (Y/T) : ")
+    if redeem_choice.upper() == "Y" and loyalty_points >= 10:
+        discount_amount = min(loyalty_points * 1000, totbay)
+        totbay -= discount_amount
+        loyalty_points -= int(discount_amount / 1000)
+        print("Loyalty Points redeemed. Diskon Rp", discount_amount)
+        print("Total Bayar setelah diskon: Rp", totbay)
+
+    # Use cashback voucher
+    use_cashback_choice = input("Ingin menggunakan cashback voucher? (Y/T) : ")
+    if use_cashback_choice.upper() == "Y" and cashback_voucher > 0:
+        cashback_discount = min(cashback_voucher * 50000, totbay)
+        totbay -= cashback_discount
+        cashback_voucher -= int(cashback_discount / 50000)
+        print("Cashback Voucher digunakan. Diskon Rp", cashback_discount)
+        print("Total Bayar setelah diskon: Rp", totbay)
+
+    pilihan = input("Apakah anda ingin order kembali Y/T? : ")
+
+    if pilihan not in ["Y", "y", "T", "t"]:
+        print("Pilihan tidak valid. Program keluar.")
+        break
