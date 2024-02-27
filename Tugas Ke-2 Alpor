@@ -1,0 +1,14 @@
+# Input nilai
+nilai = int(input("Masukkan nilai (0 atau 1): "))
+
+# Mengubah nilai menjadi Boolean
+if nilai == 1:
+    nilai_boolean = True
+elif nilai == 0:
+    nilai_boolean = False
+else:
+    print("Masukkan tidak valid.")
+    exit()
+
+# Output nilai Boolean
+print("Nilai Boolean:", nilai_boolean)
