@@ -1,0 +1,97 @@
+import java.util.InputMismatchException;
+import java.util.Scanner;
+
+// custom exception untuk operasi yang tidak valid
+class OperasiTidakValidException extends Exception {
+    public OperasiTidakValidException(String pesan) {
+        super(pesan); // memanggil superclass (Exception) 
+    }
+}
+
+public class kalkulator {
+
+    // melakukan perhitungan berdasarkan operasi
+    public static double hitung(double angka1, double angka2, int pilihanOperasi) throws OperasiTidakValidException {
+        switch (pilihanOperasi) {
+            case 1:
+                return angka1 + angka2;
+            case 2:
+                return angka1 - angka2;
+            case 3:
+                return angka1 * angka2;
+            case 4:
+                if (angka2 == 0) {
+                    throw new ArithmeticException("Pembagian dengan nol tidak diperbolehkan.");
+                }
+                return angka1 / angka2;
+            default:
+                throw new OperasiTidakValidException("Pilihan operasi tidak valid. Harap pilih antara 1, 2, 3, atau 4.");
+        }
+    }
+
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        double angka1 = 0, angka2 = 0;
+        int pilihanOperasi;
+
+        try {
+            // header
+            System.out.println("===================================");
+            System.out.println("       KALKULATOR SEDERHANA          ");
+            System.out.println("===================================");
+
+            // input dari pengguna 
+            System.out.print("\nMasukkan angka pertama: ");
+            angka1 = scanner.nextDouble();
+
+            System.out.print("Masukkan angka kedua: ");
+            angka2 = scanner.nextDouble();
+
+            // menampilkan opsi operasi
+            System.out.println("\nPilih operasi:");
+            System.out.println("1. Tambah (+)");
+            System.out.println("2. Kurang (-)");
+            System.out.println("3. Kali (*)");
+            System.out.println("4. Bagi (/)");
+            System.out.print("Masukkan pilihan (1/2/3/4): ");
+            pilihanOperasi = scanner.nextInt();
+
+            // melakukan perhitungan
+            double hasil = hitung(angka1, angka2, pilihanOperasi);
+            String operasi = "";
+            switch (pilihanOperasi) {
+                case 1:
+                    operasi = "+";
+                    break;
+                case 2:
+                    operasi = "-";
+                    break;
+                case 3:
+                    operasi = "*";
+                    break;
+                case 4:
+                    operasi = "/";
+                    break;
+            }
+            System.out.printf("\nHasil dari %.2f %s %.2f adalah: %.2f%n", angka1, operasi, angka2, hasil);
+
+        } catch (InputMismatchException e) {
+            System.out.println("\nInput tidak valid. Harap masukkan angka.");
+            scanner.next(); // Membersihkan input yang salah
+        } catch (ArithmeticException e) {
+            System.out.println("\nKesalahan: " + e.getMessage());
+        } catch (OperasiTidakValidException e) {
+            System.out.println("\nKesalahan: " + e.getMessage());
+        } catch (Exception e) {
+            System.out.println("\nTerjadi kesalahan yang tidak terduga: " + e.getMessage());
+        } finally {
+            System.out.println("\nTerima kasih telah menggunakan kalkulator ini.");
+            scanner.close();
+        }
+
+        // footer
+        System.out.println("===================================");
+        System.out.println("           PROGRAM SELESAI         ");
+        System.out.println("===================================");
+    }
+}
